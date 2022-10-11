@@ -1,0 +1,16 @@
+    [
+        {
+            "name":"big company",
+            "numberofemployees":10000,
+            "place":"NYC",
+            "rating":"4.2"
+        },
+        { 
+
+            "name":"small company",
+            "numberofemployees":1000,
+            "place":"Chennai",
+            "rating":"4.7",
+            "ceo":null
+        }
+    ]
