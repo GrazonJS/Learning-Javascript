@@ -43,7 +43,7 @@ else{
 //Functions 
 
 function sampleCheck(){   //defining a function 
-    console.log('this is an explicit function')
+    console.log('this is an implicit function')
 }
 sampleCheck()    // calling that function when required
 
@@ -65,6 +65,6 @@ sampleCheck1('this is a function with a parameter passed')  //calling that funct
             return value
           }
      */
-const sumArrow = (a,b)=> a+b   //fancy way without {} 
+const sumArrow = (a,b)=> a+b   //fancy way without {} by ES6 AKA Arrow functions 
 
 console.log(sumArrow(10,20))   // calling the function 
