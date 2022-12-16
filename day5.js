@@ -36,6 +36,27 @@ square.forEach(square => console.log(square.value))
 //Doing that .onclick thing using forEach()
 
 square.forEach(square.onclick = () => {
-    console.log(square.value)``
+    console.log(square.value)
+
 })
 
+// Increasing the count of the click bassed on the color of the boxes 
+const timesClicked = {'red' : 0, 'yellow':0 , 'green':0}
+square.forEach(square = () => {
+    square.onclick = () =>
+    timesClicked[square.value] += 1
+    square.innerText = timesClicked[square.value]
+    
+}
+     );
+
+// Clearing the values by reseting them 
+
+let clearValues = () => {
+    timesClicked[square.value] = 0
+    square.forEach(square => square.innerText = 0
+         )
+}
+   
+let clearGameBtn = document.getElementById('clearGame')
+clearGameBtn.onclick = () => clearValues()
