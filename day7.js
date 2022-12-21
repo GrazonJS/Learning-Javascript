@@ -1,16 +1,13 @@
-3// THIS IS ABOUT CREATING AN APP CALLED ROCKPAPERSCISSOR
+// THIS IS ABOUT CREATING AN APP CALLED ROCKPAPERSCISSOR
 
-/*
+const totalScore = { 
+   computerScore: 0,
+   playerScore: 0
+}
 
 
-rpsButton.forEach(rpsButton.onclick = () => {
-    playerChoice = rpsButton.value
-
-})*/
-
-let result = document.getElementById('result')
-
-const getComputerChoice = () => {
+const getComputerChoice = () => {//--3
+/* it is the first function to be called */
 
   let randomNumber = Number(Math.random()*2)
   let computerNumber = randomNumber.toFixed(0)
@@ -20,10 +17,14 @@ const getComputerChoice = () => {
   return computerChoice
 }
 
-let score;
 
-let getResult = (playerChoice, computerChoice) => {
   
+let getResult = (playerChoice, computerChoice) => {//--4
+  /*  it is the second function to be called. it compares
+     the computer and the player's choice and produce a result
+     */
+
+  let score;
   if (playerChoice == computerChoice){
     score = 0 
   }
@@ -39,42 +40,68 @@ let getResult = (playerChoice, computerChoice) => {
   return score
 }
 
-const showResult = (score, playerChoice, computerChoice) =>{
-  
+const showResult = (score, playerChoice, computerChoice) =>{//--5
+  /*we show the result in the web through DOM*/ 
+
+  const resultDiv = document.getElementById('result')
+  const handDiv = document.getElementById('hands')
+  const playerScoreDiv = document.getElementById('palyer-score')
   if(score == -1){
-    result.innerText('You Lose this time')
+    resultDiv.innerText('You Lose this time')
   }
   else if(score == 1){
-    result.innerText('You Win this time')
+    resultDiv.innerText('You Win this time')
   }
   else {
-    result.innerText('--DRAW--')
+    resultDiv.innerText('--DRAW--')
   }
+   
+  handDiv.innerText = `🧔🏻‍♂️${playerChoice} vs 🤖${computerChoice}`
+  playerScoreDiv.innerText = `your Score:${totalScore.playerScore}`
 }
 
- let onClickRPS = (playerChoice) => { 
-  
+ let onClickRPS = (playerChoice) => {//--2
+/*the whole code for the game play is here
+  all the logic functions are called here(MAIN function)*/ 
+
+  const computerChoice = getComputerChoice() //-2-got computerchoice
+  console.log(computerChoice)
+  const score = getResult(playerChoice,computerChoice)  //-got who won this time
+  totalScore.playerScore += score
+  console.log(totalScore)
+  showResult(score,playerChoice,computerChoice)
+
 }
 
-function playGame() {
-  // use querySelector to select all RPS Buttons
+let playGame = () => {//--1
+  /*the game starts here, we get the value and
+  if it is rps button => goes to onCickRPS()
+  else it is endGameButton => goes to endGameButton()
+  */
   const rpsButton = document.querySelectorAll('.rpsButton')
-  // * Adds an on click event listener to each RPS button and every time you click it, it calls the onClickRPS function with the RPS button that was last clicked *
-  
-  // 1. loop through the buttons using a forEach loop
-  // 2. Add a 'click' event listener to each button
-  // 3. Call the onClickRPS function every time someone clicks
-  // 4. Make sure to pass the currently selected rps button as an argument
+  rpsButton.forEach(rpsButton => {
+    rpsButton.onclick = () => onClickRPS(rpsButton.value)
 
- 
+    }) 
 
-  // Add a click listener to the end game button that runs the endGame() function on click
-  
+  const endGameButton = document.getElementById('endGameButton')
+  endGameButton.onclick = () => endGame(totalScore)
 }
 
-// ** endGame function clears all the text on the DOM **
-function endGame() {
-  
+function endGame(totalScore) {//--6
+  /* it is called by the playGame() if the user click endGameButton
+     it clears all the values in the web using DOM */
+
+  totalScore.playerScore = 0
+  totalScore.computerScore = 0
+
+  const resultDiv = document.getElementById('result')
+  const handDiv = document.getElementById('hands')
+  const playerScoreDiv = document.getElementById('palyer-score')
+
+  resultDiv.innerText = ''
+  handDiv.innerText = ''
+  playerScoreDiv.innerText = ''
 }
 
 playGame()
