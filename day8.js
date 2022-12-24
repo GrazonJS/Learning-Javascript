@@ -16,8 +16,8 @@ const button = document.getElementById('button')
 console.log('the first block');
 const generate = () => {
 
-fetch('https://dog.ceo/api/breeds/image/random')
- .then(response => response.json())
+fetch('https://dog.ceo/api/breeds/image/random') //we've sent a request here
+ .then(response => response.json())  // we declare here get the response as a JSON file
  .then(json => {
     randomDogDiv.innerHTML = `<img src='${json.message}'>`
  })
